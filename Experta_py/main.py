@@ -74,7 +74,8 @@ class Greetings(KnowledgeEngine):
         self.label1 = tk.Label(self.fr_buttons,
                                text="Hi! I am Dr.Yar, I am here to help you make your health better. For that "
                                     "you'll have to answer a few questions about your conditions. Do you feel "
-                                    "any of the following symptoms:")
+                                    "any of the following symptoms:", wraplength=200, justify="left", font = ('Comic Sans MS', 10, 'bold'))
+        self.label1.grid(column=0, row=0, sticky="ew", columnspan=4)
         # sympthom 1
         self.labelheadache = tk.Label(self.fr_buttons, text="Headache:")
         self.labelheadache.grid(column=0, row=1, sticky="ew")
@@ -167,7 +168,7 @@ class Greetings(KnowledgeEngine):
         self.entry13.grid(column=1, row=13)
 
         # Button
-        self.boton1 = tk.Button(self.fr_buttons, text="Diagnosticar", command=self.disease)
+        self.boton1 = tk.Button(self.fr_buttons, text="Diagnosticar", command=self.disease(disease="Jaundice"))
         self.boton1.grid(column=1, row=14)
 
         self.fr_buttons.grid(row=0, column=0, sticky="ns")
@@ -327,11 +328,9 @@ class Greetings(KnowledgeEngine):
         id_disease = disease
         disease_details = get_details(id_disease)
         treatments = get_treatments(id_disease)
-        diagnostico = "The most probable disease that you have is %s\n" % id_disease % "A short description of the " \
-                                                                                       "disease is given below :\n" \
-                      + disease_details + "\n ""The common medications and procedures suggested by other real doctors are: \n" + treatments + "\n "
+        diagnostico = "The most probable disease that you have is \n" + id_disease + "\nA short description of the disease is given below :\n" + disease_details + "\n ""The common medications and procedures suggested by other real doctors are: \n" + treatments + "\n"
 
-        self.txt_edit.configure(text=diagnostico)
+        self.txt_edit.insert("end", diagnostico)
         '''
         print("")
         print("The most probable disease that you have is %s\n" % (id_disease))
